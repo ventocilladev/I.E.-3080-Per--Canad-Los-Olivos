@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGest 3080 | Gestión Escolar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">E</div>
+
+            <div>
+                <h2>EduGest</h2>
+                <span>I.E. 3080</span>
+            </div>
+        </div>
+
+        <div class="school-name">
+            Perú-Canadá
+        </div>
+
+        <nav class="menu">
+
+            <p class="menu-title">PRINCIPAL</p>
+
+            <button class="menu-item active" onclick="showSection('dashboard', this)">
+                <span>▦</span>
+                Dashboard
+            </button>
+
+            <button class="menu-item" onclick="showSection('estudiantes', this)">
+                <span>♙</span>
+                Estudiantes
+            </button>
+
+            <button class="menu-item" onclick="showSection('docentes', this)">
+                <span>♟</span>
+                Docentes
+            </button>
+
+            <p class="menu-title">ACADÉMICO</p>
+
+            <button class="menu-item" onclick="showSection('cursos', this)">
+                <span>▤</span>
+                Cursos
+            </button>
+
+            <button class="menu-item" onclick="showSection('notas', this)">
+                <span>✓</span>
+                Notas
+            </button>
+
+            <button class="menu-item" onclick="showSection('asistencia', this)">
+                <span>◷</span>
+                Asistencia
+            </button>
+
+            <p class="menu-title">GESTIÓN</p>
+
+            <button class="menu-item" onclick="showSection('familias', this)">
+                <span>♧</span>
+                Familias
+            </button>
+
+            <button class="menu-item" onclick="showSection('inventario', this)">
+                <span>▣</span>
+                Inventario
+            </button>
+
+            <button class="menu-item" onclick="showSection('comunicados', this)">
+                <span>◉</span>
+                Comunicados
+            </button>
+
+            <button class="menu-item" onclick="showSection('reportes', this)">
+                <span>▥</span>
+                Reportes
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button class="menu-item">
+                <span>⚙</span>
+                Configuración
+            </button>
+
+            <div class="user-mini">
+                <div class="avatar">AD</div>
+
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Gestión académica</small>
+                </div>
+
+                <span>⋮</span>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="mobile-brand">
+                <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+                <strong>EduGest 3080</strong>
+            </div>
+
+            <div class="search">
+                <span>⌕</span>
+                <input
+                    type="text"
+                    id="globalSearch"
+                    placeholder="Buscar estudiantes, docentes..."
+                    onkeyup="globalSearch()"
+                >
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-button" title="Notificaciones">
+                    ♧
+                    <span class="notification">3</span>
+                </button>
+
+                <div class="top-user">
+                    <div class="avatar">AD</div>
+
+                    <div>
+                        <strong>Administrador</strong>
+                        <small>Administrador</small>
+                    </div>
+
+                    <span>⌄</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="section active-section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">SISTEMA DE GESTIÓN ESCOLAR</span>
+                        <h1>Dashboard</h1>
+                        <p>Resumen general de la institución educativa.</p>
+                    </div>
+
+                    <button class="primary-button" onclick="openModal()">
+                        + Nuevo registro
+                    </button>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">♙</div>
+
+                        <div>
+                            <span>Estudiantes</span>
+                            <h2>1,062</h2>
+                            <small class="positive">↑ 4.8% <em>vs. periodo anterior</em></small>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple">♟</div>
+
+                        <div>
+                            <span>Docentes</span>
+                            <h2>53</h2>
+                            <small class="positive">↑ 2.1% <em>vs. periodo anterior</em></small>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">▤</div>
+
+                        <div>
+                            <span>Secciones</span>
+                            <h2>39</h2>
+                            <small class="neutral">3 niveles educativos</small>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+
+                        <div>
+                            <span>Asistencia</span>
+                            <h2>94.7%</h2>
+                            <small class="positive">↑ 1.3% <em>este mes</em></small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- CHARTS -->
+
+                <div class="charts-grid">
+
+                    <div class="panel chart-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Estudiantes por nivel</h3>
+                                <p>Distribución de estudiantes</p>
+                            </div>
+
+                            <select>
+                                <option>2026</option>
+                                <option>2025</option>
+                            </select>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="studentsChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel chart-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Asistencia mensual</h3>
+                                <p>Porcentaje promedio</p>
+                            </div>
+
+                            <span class="badge green-badge">94.7%</span>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTTOM GRID -->
+
+                <div class="bottom-grid">
+
+                    <!-- ACTIVITIES -->
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Actividad reciente</h3>
+                                <p>Últimos movimientos del sistema</p>
+                            </div>
+
+                            <button class="text-button">Ver todo</button>
+                        </div>
+
+
+                        <div class="activity-list">
+
+                            <div class="activity">
+                                <div class="activity-icon blue">♙</div>
+
+                                <div class="activity-info">
+                                    <strong>Nuevo estudiante registrado</strong>
+                                    <span>María Fernanda Torres</span>
+                                </div>
+
+                                <time>Hace 12 min</time>
+                            </div>
+
+
+                            <div class="activity">
+                                <div class="activity-icon green">✓</div>
+
+                                <div class="activity-info">
+                                    <strong>Asistencia registrada</strong>
+                                    <span>5.º de Primaria - Sección A</span>
+                                </div>
+
+                                <time>Hace 35 min</time>
+                            </div>
+
+
+                            <div class="activity">
+                                <div class="activity-icon purple">▤</div>
+
+                                <div class="activity-info">
+                                    <strong>Notas actualizadas</strong>
+                                    <span>Matemática - 2.º Secundaria</span>
+                                </div>
+
+                                <time>Hace 1 h</time>
+                            </div>
+
+
+                            <div class="activity">
+                                <div class="activity-icon orange">◉</div>
+
+                                <div class="activity-info">
+                                    <strong>Comunicado publicado</strong>
+                                    <span>Reunión general de padres</span>
+                                </div>
+
+                                <time>Hace 2 h</time>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QUICK ACTIONS -->
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Acciones rápidas</h3>
+                                <p>Operaciones frecuentes</p>
+                            </div>
+                        </div>
+
+
+                        <div class="quick-actions">
+
+                            <button onclick="openModal()">
+                                <span class="quick-icon blue">♙</span>
+                                <div>
+                                    <strong>Registrar estudiante</strong>
+                                    <small>Agregar nuevo alumno</small>
+                                </div>
+                                <b>›</b>
+                            </button>
+
+
+                            <button onclick="showSection('asistencia')">
+                                <span class="quick-icon green">✓</span>
+                                <div>
+                                    <strong>Registrar asistencia</strong>
+                                    <small>Control diario</small>
+                                </div>
+                                <b>›</b>
+                            </button>
+
+
+                            <button onclick="showSection('notas')">
+                                <span class="quick-icon purple">▤</span>
+                                <div>
+                                    <strong>Ingresar notas</strong>
+                                    <small>Evaluación académica</small>
+                                </div>
+                                <b>›</b>
+                            </button>
+
+
+                            <button onclick="showSection('reportes')">
+                                <span class="quick-icon orange">▥</span>
+                                <div>
+                                    <strong>Generar reporte</strong>
+                                    <small>Consultar información</small>
+                                </div>
+                                <b>›</b>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ESTUDIANTES -->
+
+            <section id="estudiantes" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">GESTIÓN ACADÉMICA</span>
+                        <h1>Estudiantes</h1>
+                        <p>Administración del alumnado de la institución.</p>
+                    </div>
+
+                    <button class="primary-button" onclick="openModal()">
+                        + Registrar estudiante
+                    </button>
+
+                </div>
+
+
+                <div class="filter-bar">
+
+                    <div class="table-search">
+                        <span>⌕</span>
+                        <input
+                            id="studentSearch"
+                            type="text"
+                            placeholder="Buscar por nombre o DNI..."
+                            onkeyup="filterStudents()"
+                        >
+                    </div>
+
+                    <select>
+                        <option>Todos los niveles</option>
+                        <option>Inicial</option>
+                        <option>Primaria</option>
+                        <option>Secundaria</option>
+                    </select>
+
+                    <select>
+                        <option>Todas las secciones</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Lista de estudiantes</h3>
+                            <p>Registro académico 2026</p>
+                        </div>
+
+                        <span class="record-count">1,062 registros</span>
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table id="studentTable">
+
+                            <thead>
+                                <tr>
+                                    <th>ESTUDIANTE</th>
+                                    <th>DNI</th>
+                                    <th>NIVEL</th>
+                                    <th>GRADO</th>
+                                    <th>SECCIÓN</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCIÓN</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">MT</div>
+                                            <div>
+                                                <strong>María Fernanda Torres</strong>
+                                                <span>maria.torres@estudiante.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>74852136</td>
+                                    <td>Primaria</td>
+                                    <td>5.º</td>
+                                    <td>A</td>
+                                    <td><span class="status active">Activo</span></td>
+                                    <td><button class="more">⋮</button></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">JP</div>
+                                            <div>
+                                                <strong>José Antonio Pérez</strong>
+                                                <span>jose.perez@estudiante.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>73621485</td>
+                                    <td>Secundaria</td>
+                                    <td>2.º</td>
+                                    <td>B</td>
+                                    <td><span class="status active">Activo</span></td>
+                                    <td><button class="more">⋮</button></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">LS</div>
+                                            <div>
+                                                <strong>Luciana Sofía Ramos</strong>
+                                                <span>luciana.ramos@estudiante.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>75419862</td>
+                                    <td>Primaria</td>
+                                    <td>6.º</td>
+                                    <td>A</td>
+                                    <td><span class="status active">Activo</span></td>
+                                    <td><button class="more">⋮</button></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">DR</div>
+                                            <div>
+                                                <strong>Diego Rodrigo Sánchez</strong>
+                                                <span>diego.sanchez@estudiante.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>72984561</td>
+                                    <td>Secundaria</td>
+                                    <td>4.º</td>
+                                    <td>C</td>
+                                    <td><span class="status active">Activo</span></td>
+                                    <td><button class="more">⋮</button></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">CV</div>
+                                            <div>
+                                                <strong>Camila Valeria Huamán</strong>
+                                                <span>camila.huaman@estudiante.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>76123548</td>
+                                    <td>Inicial</td>
+                                    <td>5 años</td>
+                                    <td>A</td>
+                                    <td><span class="status active">Activo</span></td>
+                                    <td><button class="more">⋮</button></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DOCENTES -->
+
+            <section id="docentes" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">GESTIÓN DEL PERSONAL</span>
+                        <h1>Docentes</h1>
+                        <p>Directorio del personal docente.</p>
+                    </div>
+
+                    <button class="primary-button" onclick="openModal()">
+                        + Registrar docente
+                    </button>
+
+                </div>
+
+
+                <div class="stats-grid small-stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">♟</div>
+                        <div>
+                            <span>Total docentes</span>
+                            <h2>53</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+                        <div>
+                            <span>Activos</span>
+                            <h2>51</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">◷</div>
+                        <div>
+                            <span>Tiempo completo</span>
+                            <h2>44</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Directorio docente</h3>
+                            <p>Personal registrado</p>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>DOCENTE</th>
+                                    <th>ESPECIALIDAD</th>
+                                    <th>NIVEL</th>
+                                    <th>CONDICIÓN</th>
+                                    <th>ESTADO</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">RC</div>
+                                            <div>
+                                                <strong>Rosa Carmen Castillo</strong>
+                                                <span>rcastillo@colegio.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Matemática</td>
+                                    <td>Secundaria</td>
+                                    <td>Nombrado</td>
+                                    <td><span class="status active">Activo</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">JG</div>
+                                            <div>
+                                                <strong>Jorge Luis García</strong>
+                                                <span>jgarcia@colegio.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Comunicación</td>
+                                    <td>Secundaria</td>
+                                    <td>Contratado</td>
+                                    <td><span class="status active">Activo</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="person">
+                                            <div class="person-avatar">MP</div>
+                                            <div>
+                                                <strong>María Elena Paredes</strong>
+                                                <span>mparedes@colegio.edu.pe</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Educación Primaria</td>
+                                    <td>Primaria</td>
+                                    <td>Nombrado</td>
+                                    <td><span class="status active">Activo</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CURSOS -->
+
+            <section id="cursos" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">PLAN ACADÉMICO</span>
+                        <h1>Cursos</h1>
+                        <p>Áreas y asignaturas académicas.</p>
+                    </div>
+
+                    <button class="primary-button" onclick="openModal()">
+                        + Nuevo curso
+                    </button>
+
+                </div>
+
+
+                <div class="course-grid">
+
+                    <div class="course-card">
+                        <div class="course-icon blue">∑</div>
+                        <h3>Matemática</h3>
+                        <p>Área académica</p>
+                        <div class="course-bottom">
+                            <span>12 secciones</span>
+                            <span>8 docentes</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-icon purple">A</div>
+                        <h3>Comunicación</h3>
+                        <p>Área académica</p>
+                        <div class="course-bottom">
+                            <span>12 secciones</span>
+                            <span>7 docentes</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-icon green">⚗</div>
+                        <h3>Ciencia y Tecnología</h3>
+                        <p>Área académica</p>
+                        <div class="course-bottom">
+                            <span>9 secciones</span>
+                            <span>6 docentes</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-icon orange">◉</div>
+                        <h3>Ciencias Sociales</h3>
+                        <p>Área académica</p>
+                        <div class="course-bottom">
+                            <span>8 secciones</span>
+                            <span>5 docentes</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-icon red">⚽</div>
+                        <h3>Educación Física</h3>
+                        <p>Área académica</p>
+                        <div class="course-bottom">
+                            <span>10 secciones</span>
+                            <span>4 docentes</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-icon teal">★</div>
+                        <h3>Inglés</h3>
+                        <p>Área académica</p>
+                        <div class="course-bottom">
+                            <span>10 secciones</span>
+                            <span>4 docentes</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- NOTAS -->
+
+            <section id="notas" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">EVALUACIÓN</span>
+                        <h1>Registro de notas</h1>
+                        <p>Consulta y gestión del rendimiento académico.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Registrar evaluación
+                    </button>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h3>Rendimiento académico</h3>
+                            <p>Segundo bimestre · 2026</p>
+                        </div>
+
+                        <select>
+                            <option>5.º Primaria A</option>
+                            <option>6.º Primaria A</option>
+                            <option>2.º Secundaria B</option>
+                        </select>
+                    </div>
+
+
+                    <div class="grades-table">
+
+                        <div class="grade-row grade-header">
+                            <span>ESTUDIANTE</span>
+                            <span>MATEMÁTICA</span>
+                            <span>COMUNICACIÓN</span>
+                            <span>CIENCIA</span>
+                            <span>PROMEDIO</span>
+                        </div>
+
+                        <div class="grade-row">
+                            <span><strong>María Fernanda Torres</strong></span>
+                            <span class="grade good">18</span>
+                            <span class="grade good">17</span>
+                            <span class="grade good">18</span>
+                            <span><strong>17.7</strong></span>
+                        </div>
+
+                        <div class="grade-row">
+                            <span><strong>Luciana Sofía Ramos</strong></span>
+                            <span class="grade good">17</span>
+                            <span class="grade regular">15</span>
+                            <span class="grade good">18</span>
+                            <span><strong>16.7</strong></span>
+                        </div>
+
+                        <div class="grade-row">
+                            <span><strong>Pedro Miguel Flores</strong></span>
+                            <span class="grade regular">14</span>
+                            <span class="grade good">17</span>
+                            <span class="grade regular">15</span>
+                            <span><strong>15.3</strong></span>
+                        </div>
+
+                        <div class="grade-row">
+                            <span><strong>Andrea Valentina Ruiz</strong></span>
+                            <span class="grade good">19</span>
+                            <span class="grade good">18</span>
+                            <span class="grade good">19</span>
+                            <span><strong>18.7</strong></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ASISTENCIA -->
+
+            <section id="asistencia" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">CONTROL ESCOLAR</span>
+                        <h1>Asistencia</h1>
+                        <p>Control de asistencia de estudiantes.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Registrar asistencia
+                    </button>
+
+                </div>
+
+
+                <div class="stats-grid small-stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+                        <div>
+                            <span>Presentes</span>
+                            <h2>1,005</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">!</div>
+                        <div>
+                            <span>Tardanzas</span>
+                            <h2>31</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon red">×</div>
+                        <div>
+                            <span>Faltas</span>
+                            <h2>26</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Asistencia de hoy</h3>
+                            <p>27 de agosto de 2026</p>
+                        </div>
+
+                        <span class="badge green-badge">94.7% asistencia</span>
+
+                    </div>
+
+
+                    <div class="attendance-list">
+
+                        <div class="attendance-row">
+                            <div>
+                                <strong>5.º Primaria A</strong>
+                                <span>28 estudiantes</span>
+                            </div>
+
+                            <div class="attendance-bar">
+                                <div style="width: 96%"></div>
+                            </div>
+
+                            <strong>96%</strong>
+                        </div>
+
+
+                        <div class="attendance-row">
+                            <div>
+                                <strong>6.º Primaria A</strong>
+                                <span>27 estudiantes</span>
+                            </div>
+
+                            <div class="attendance-bar">
+                                <div style="width: 94%"></div>
+                            </div>
+
+                            <strong>94%</strong>
+                        </div>
+
+
+                        <div class="attendance-row">
+                            <div>
+                                <strong>2.º Secundaria B</strong>
+                                <span>31 estudiantes</span>
+                            </div>
+
+                            <div class="attendance-bar">
+                                <div style="width: 91%"></div>
+                            </div>
+
+                            <strong>91%</strong>
+                        </div>
+
+
+                        <div class="attendance-row">
+                            <div>
+                                <strong>4.º Secundaria C</strong>
+                                <span>30 estudiantes</span>
+                            </div>
+
+                            <div class="attendance-bar">
+                                <div style="width: 97%"></div>
+                            </div>
+
+                            <strong>97%</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FAMILIAS -->
+
+            <section id="familias" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">COMUNIDAD EDUCATIVA</span>
+                        <h1>Familias</h1>
+                        <p>Gestión de padres y apoderados.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Registrar apoderado
+                    </button>
+
+                </div>
+
+
+                <div class="panel empty-panel">
+
+                    <div class="empty-icon">♧</div>
+
+                    <h2>Gestión de familias</h2>
+
+                    <p>
+                        Aquí podrás administrar padres, madres y apoderados
+                        relacionados con cada estudiante.
+                    </p>
+
+                    <button class="secondary-button">
+                        Configurar módulo
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- INVENTARIO -->
+
+            <section id="inventario" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">RECURSOS</span>
+                        <h1>Inventario</h1>
+                        <p>Control de bienes y recursos institucionales.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Registrar activo
+                    </button>
+
+                </div>
+
+
+                <div class="stats-grid small-stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">▣</div>
+                        <div>
+                            <span>Activos registrados</span>
+                            <h2>428</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">✓</div>
+                        <div>
+                            <span>Operativos</span>
+                            <h2>401</h2>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">!</div>
+                        <div>
+                            <span>En mantenimiento</span>
+                            <h2>27</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- COMUNICADOS -->
+
+            <section id="comunicados" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">COMUNICACIÓN</span>
+                        <h1>Comunicados</h1>
+                        <p>Información dirigida a la comunidad educativa.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Nuevo comunicado
+                    </button>
+
+                </div>
+
+
+                <div class="notice-grid">
+
+                    <div class="notice-card">
+                        <span class="notice-tag blue-tag">INSTITUCIONAL</span>
+                        <h3>Reunión general de padres de familia</h3>
+                        <p>Información sobre la próxima reunión institucional.</p>
+                        <small>Publicado hace 2 horas</small>
+                    </div>
+
+                    <div class="notice-card">
+                        <span class="notice-tag orange-tag">ACADÉMICO</span>
+                        <h3>Evaluaciones del segundo bimestre</h3>
+                        <p>Calendario de evaluaciones para los diferentes niveles.</p>
+                        <small>Publicado ayer</small>
+                    </div>
+
+                    <div class="notice-card">
+                        <span class="notice-tag green-tag">ACTIVIDAD</span>
+                        <h3>Actividades deportivas escolares</h3>
+                        <p>Información sobre las actividades programadas.</p>
+                        <small>Publicado hace 3 días</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- REPORTES -->
+
+            <section id="reportes" class="section">
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">ANÁLISIS Y DATOS</span>
+                        <h1>Reportes</h1>
+                        <p>Información estadística de la institución.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="reports-grid">
+
+                    <button class="report-card">
+                        <div class="report-icon blue">♙</div>
+                        <h3>Reporte de estudiantes</h3>
+                        <p>Listado completo por nivel, grado y sección.</p>
+                        <span>Generar reporte →</span>
+                    </button>
+
+
+                    <button class="report-card">
+                        <div class="report-icon green">✓</div>
+                        <h3>Reporte de asistencia</h3>
+                        <p>Resumen de asistencia, faltas y tardanzas.</p>
+                        <span>Generar reporte →</span>
+                    </button>
+
+
+                    <button class="report-card">
+                        <div class="report-icon purple">▤</div>
+                        <h3>Reporte académico</h3>
+                        <p>Promedios y rendimiento por curso.</p>
+                        <span>Generar reporte →</span>
+                    </button>
+
+
+                    <button class="report-card">
+                        <div class="report-icon orange">▣</div>
+                        <h3>Reporte de inventario</h3>
+                        <p>Estado de los bienes y recursos institucionales.</p>
+                        <span>Generar reporte →</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+        <footer>
+            <span>EduGest 3080</span>
+            <span>Sistema de Gestión Escolar · 2026</span>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal-overlay" id="modal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <span class="eyebrow">NUEVO REGISTRO</span>
+                <h2>Registrar estudiante</h2>
+            </div>
+
+            <button class="close-modal" onclick="closeModal()">×</button>
+
+        </div>
+
+
+        <form onsubmit="saveStudent(event)">
+
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label>Nombre completo</label>
+                    <input id="newName" type="text" placeholder="Ingrese nombre completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>DNI</label>
+                    <input type="text" placeholder="Ej. 74852136" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nivel</label>
+
+                    <select>
+                        <option>Inicial</option>
+                        <option>Primaria</option>
+                        <option>Secundaria</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Grado</label>
+                    <select>
+                        <option>1.º</option>
+                        <option>2.º</option>
+                        <option>3.º</option>
+                        <option>4.º</option>
+                        <option>5.º</option>
+                        <option>6.º</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Sección</label>
+
+                    <select>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button" class="secondary-button" onclick="closeModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="primary-button">
+                    Guardar estudiante
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
